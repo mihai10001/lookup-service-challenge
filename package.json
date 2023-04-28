@@ -2,8 +2,8 @@
   "name": "backend-boilerplate",
   "version": "1.0.0",
   "scripts": {
-    "build": "dotnet build app/backend.sln",
-    "start": "cd app/backend && dotnet run",
+    "build": "dotnet build app/Amach.sln",
+    "start": "cd app/Amach.API && dotnet run",
     "test": "cypress run"
   },
   "devDependencies": {
