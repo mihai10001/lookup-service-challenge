@@ -5,4 +5,8 @@
   <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Amach.Domain\Amach.Domain.csproj" />
+    <ProjectReference Include="..\Amach.Services\Amach.Services.csproj" />
+  </ItemGroup>
 </Project>

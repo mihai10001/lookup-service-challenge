@@ -1,3 +1,5 @@
+using Amach.Domain.Interfaces;
+using Amach.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +16,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
+        services.AddTransient<ILookupService, LookupService>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
