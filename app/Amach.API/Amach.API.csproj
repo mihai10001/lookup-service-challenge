@@ -1,10 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Flurl.Http" Version="3.2.4" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Amach.Domain\Amach.Domain.csproj" />
     <ProjectReference Include="..\Amach.Services\Amach.Services.csproj" />
