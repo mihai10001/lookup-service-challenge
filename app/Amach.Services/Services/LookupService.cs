@@ -19,9 +19,9 @@ public class LookupService : ILookupService
 
     public async Task<CreditData> Lookup(string SSN)
     {
-        var debtDetails = await GetDebtDetails(SSN);
-        var personalDetails = await GetPersonalDetails(SSN);
-        var assessedIncomeDetails = await GetAssessedIncomeDetails(SSN);
+        var debtDetails = await GetDetails<DebtDetails>(_creditDataAPIOptions.BaseUrl, $"debt/{SSN}");
+        var personalDetails = await GetDetails<PersonalDetails>(_creditDataAPIOptions.BaseUrl, $"personal-details/{SSN}");
+        var assessedIncomeDetails = await GetDetails<AssessedIncomeDetails>(_creditDataAPIOptions.BaseUrl, $"assessed-income/{SSN}");
 
         return new()
         {
@@ -34,30 +34,10 @@ public class LookupService : ILookupService
         };
     }
 
-    private Task<PersonalDetails> GetPersonalDetails(string SSN)
+    private static Task<T> GetDetails<T>(string baseUrl, string pathSegment)
     {
-        return _creditDataAPIOptions
-            .BaseUrl
-            .AppendPathSegment("personal-details")
-            .AppendPathSegment(SSN)
-            .GetJsonAsync<PersonalDetails>();
-    }
-
-    private Task<AssessedIncomeDetails> GetAssessedIncomeDetails(string SSN)
-    {
-        return _creditDataAPIOptions
-            .BaseUrl
-            .AppendPathSegment("assessed-income")
-            .AppendPathSegment(SSN)
-            .GetJsonAsync<AssessedIncomeDetails>();
-    }
-
-    private Task<DebtDetails> GetDebtDetails(string SSN)
-    {
-        return _creditDataAPIOptions
-            .BaseUrl
-            .AppendPathSegment("debt")
-            .AppendPathSegment(SSN)
-            .GetJsonAsync<DebtDetails>();
+        return baseUrl
+            .AppendPathSegment(pathSegment)
+            .GetJsonAsync<T>();
     }
 }
