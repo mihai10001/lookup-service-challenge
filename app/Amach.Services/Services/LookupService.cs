@@ -1,9 +1,11 @@
+using System.Net;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
 using Amach.Domain.Interfaces;
 using Amach.Domain.Models;
 using Amach.Domain.Options;
+using Amach.Domain.Exceptions;
 using Microsoft.Extensions.Options;
 
 namespace Amach.Services.Services;
@@ -36,8 +38,16 @@ public class LookupService : ILookupService
 
     private static Task<T> GetDetails<T>(string baseUrl, string pathSegment)
     {
-        return baseUrl
-            .AppendPathSegment(pathSegment)
-            .GetJsonAsync<T>();
+        try
+        {
+            return baseUrl
+                .AppendPathSegment(pathSegment)
+                .GetJsonAsync<T>();
+        }
+        catch (FlurlHttpException ex)
+        {
+            if (ex.Call.Response.StatusCode is (int)HttpStatusCode.NotFound) throw new NotFoundException();
+            else throw;
+        }
     }
 }
