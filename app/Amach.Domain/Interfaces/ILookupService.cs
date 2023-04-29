@@ -1,8 +1,9 @@
-﻿using Amach.Domain.Models;
+﻿using System.Threading.Tasks;
+using Amach.Domain.Models;
 
 namespace Amach.Domain.Interfaces;
 
 public interface ILookupService
 {
-    public CreditData Lookup(string SSN);
+    public Task<CreditData> Lookup(string SSN);
 }

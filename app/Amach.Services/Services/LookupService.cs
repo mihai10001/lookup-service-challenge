@@ -17,9 +17,21 @@ public class LookupService : ILookupService
         _creditDataAPIOptions = options.Value;
     }
 
-    public CreditData Lookup(string SSN)
+    public async Task<CreditData> Lookup(string SSN)
     {
-        throw new NotImplementedException();
+        var debtDetails = await GetDebtDetails(SSN);
+        var personalDetails = await GetPersonalDetails(SSN);
+        var assessedIncomeDetails = await GetAssessedIncomeDetails(SSN);
+
+        return new()
+        {
+            FirstName = personalDetails.FirstName,
+            LastName = personalDetails.LastName,
+            Address = personalDetails.Address,
+            AssessedIncome = assessedIncomeDetails.AssessedIncome,
+            BalanceOfDebt = debtDetails.BalanceOfDebt,
+            Complaints = debtDetails.Complaints
+        };
     }
 
     private Task<PersonalDetails> GetPersonalDetails(string SSN)
