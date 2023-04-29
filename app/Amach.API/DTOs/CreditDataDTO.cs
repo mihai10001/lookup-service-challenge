@@ -11,7 +11,7 @@ public class CreditDataDTO
     public int balance_of_debt { get; set; }
     public bool complaints { get; set; }
 
-    public CreditDataDTO MapFromModel(CreditData model)
+    public static CreditDataDTO MapFrom(CreditData model)
     {
         return new()
         {

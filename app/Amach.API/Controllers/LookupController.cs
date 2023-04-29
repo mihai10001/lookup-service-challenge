@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Amach.API.DTOs;
 using Amach.Domain.Interfaces;
-using Amach.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Amach.API.Controllers;
@@ -14,8 +14,10 @@ public class LookupController : Controller
 
     [HttpGet]
     [Route("credit-data/{ssn}")]
-    public async Task<ActionResult<CreditData>> CreditData(string SSN)
+    public async Task<ActionResult<CreditDataDTO>> CreditData(string SSN)
     {
-        return await _lookupService.Lookup(SSN);
+        var creditData = await _lookupService.Lookup(SSN);
+        var dto = CreditDataDTO.MapFrom(creditData);
+        return Ok(dto);
     }
 }
