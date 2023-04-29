@@ -36,11 +36,11 @@ public class LookupService : ILookupService
         };
     }
 
-    private static Task<T> GetDetails<T>(string baseUrl, string pathSegment)
+    private static async Task<T> GetDetails<T>(string baseUrl, string pathSegment)
     {
         try
         {
-            return baseUrl
+            return await baseUrl
                 .AppendPathSegment(pathSegment)
                 .GetJsonAsync<T>();
         }
