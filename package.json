@@ -1,9 +1,9 @@
 {
-  "name": "lookup-service-level-1",
+  "name": "backend-boilerplate",
   "version": "1.0.0",
   "scripts": {
-    "build": "echo build your app here",
-    "start": "echo start your app here",
+    "build": "dotnet build app/Amach.sln",
+    "start": "cd app/Amach.API && dotnet run",
     "test": "cypress run"
   },
   "devDependencies": {
